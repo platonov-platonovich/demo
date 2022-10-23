@@ -19,5 +19,9 @@ public class Room {
     public void setStatus(String status) {
         this.status = status;
     }
+    public void button(){
+        if (status == "on") {
+            status = "off";
+            status = "on";
 
-}
+        }}}

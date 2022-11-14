@@ -2,13 +2,15 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Rooms</title>
+    <title>Room</title>
 </head>
 <body>
 
 
-<p th:text="${room.id}"/>
-<p th:text="${room.status}"/>
-
+<p th:text="${room.getId()}">VALUE</p>
+<p th:text="${room.getStatus()}">VALUE</p>
+<br/>
+<hr/>
+<a href="/room/all">All rooms</a>
 </body>
 </html>

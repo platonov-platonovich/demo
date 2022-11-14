@@ -2,7 +2,7 @@ package com.lamps.demo.models;
 
 public class Room {
     private int id;
-    private  String status;
+    private String status;
 
     public int getId() {
         return id;
@@ -19,9 +19,12 @@ public class Room {
     public void setStatus(String status) {
         this.status = status;
     }
-    public void button(){
+
+    public void button() {
         if (status == "on") {
             status = "off";
+        } else {
             status = "on";
-
-        }}}
+        }
+    }
+}

@@ -7,9 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.awt.event.PaintEvent.UPDATE;
-import static java.lang.invoke.VarHandle.AccessMode.SET;
-
 @Component
 public class RoomDAO {
     private static int ROOMS_COUNT;
@@ -30,10 +27,6 @@ public class RoomDAO {
             throw new RuntimeException(throwables);
         }
     }
-public void update(int id, Room updateRoom) throws SQLException {
-        PreparedStatement preparedStatement=connection.prepareStatement("UPDATE Room SET status=? WHERE id=?");
-        preparedStatement.setString(1, updateRoom.getStatus());
-}
 
     public List<Room> index() {
         List<Room> rooms = new ArrayList<>();
@@ -65,5 +58,10 @@ public void update(int id, Room updateRoom) throws SQLException {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void update(int id, Room updatedRoom) {
+        Room roomToBEUpdated = getById(id);
+        roomToBEUpdated.setStatus(updatedRoom.getStatus());
     }
 }

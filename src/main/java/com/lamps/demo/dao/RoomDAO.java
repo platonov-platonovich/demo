@@ -61,7 +61,14 @@ public class RoomDAO {
     }
 
     public void update(int id, Room updatedRoom) {
-        Room roomToBEUpdated = getById(id);
-        roomToBEUpdated.setStatus(updatedRoom.getStatus());
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("UPDATE Room SET status=? WHERE id=?");
+            preparedStatement.setString(1, updatedRoom.getStatus());
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

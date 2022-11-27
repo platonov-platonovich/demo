@@ -7,11 +7,12 @@
 <body>
 
 
-<form th:method="PATH" th:action="@{/rooms/{id}(id=${room.getID()})}"th:object="${room}">
+<form th:method="PATCH" th:action="@{/room/{id}(id=${room.getId()})}" th:object="${room}">
     <label for="status">Enter status</label>
     <input type="text" th:field="*{status}" id ="status"/>
     <br/>
-    <input type="submit" value="Update"/>
+    <input type="submit" value="Change"/>
 </form>
+
 </body>
 </html>

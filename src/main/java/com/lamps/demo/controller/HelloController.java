@@ -18,11 +18,11 @@ public class HelloController {
         this.roomDAO = roomDAO;
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public String index(Model model) {
         List<Room> rooms = roomDAO.index();
         model.addAttribute("rooms", rooms);
-        return "allrooms";
+        return "index";
     }
 
     @GetMapping("/{id}")
@@ -42,6 +42,6 @@ public class HelloController {
     public String update(@ModelAttribute("room") Room room, @PathVariable("id") int id) {
         System.out.println(room.getId() + " status:"+ room.getStatus() + " path variable: " + id);
         roomDAO.update(id, room);
-        return "redirect:/room/all";
+        return "redirect:/room";
     }
 }

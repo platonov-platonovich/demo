@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/room")
 public class HelloController {
 
     private final RoomDAO roomDAO;
@@ -42,6 +41,6 @@ public class HelloController {
     public String update(@ModelAttribute("room") Room room, @PathVariable("id") int id) {
         System.out.println(room.getId() + " status:"+ room.getStatus() + " path variable: " + id);
         roomDAO.update(id, room);
-        return "redirect:/room";
+        return "redirect:";
     }
 }

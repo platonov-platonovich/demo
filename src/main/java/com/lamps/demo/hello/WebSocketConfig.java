@@ -1,4 +1,4 @@
-package com.lamps.demo;
+package com.lamps.demo.hello;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

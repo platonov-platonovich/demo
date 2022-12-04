@@ -1,4 +1,4 @@
-package com.lamps.demo;
+package com.lamps.demo.hello;
 
 public class Greeting {
 

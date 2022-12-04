@@ -1,8 +1,6 @@
 package com.lamps.demo.controller;
 
 import com.lamps.demo.dao.RoomDAO;
-import com.lamps.demo.hello.Greeting;
-import com.lamps.demo.hello.HelloMessage;
 import com.lamps.demo.hello.Room;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
@@ -45,16 +42,22 @@ public class GreetingController {
         return "edit";
     }
 
-    @PostMapping("/{id}")
-    public String update(@ModelAttribute("room") Room room, @PathVariable("id") int id) {
-        roomDAO.update(id, room);
-        return "redirect:";
-    }
+//    @PostMapping("/{id}")
+//    public String update(@ModelAttribute("room") Room room, @PathVariable("id") int id) {
+//        roomDAO.update(id, room);
+//        return "redirect:";
+//    }
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return new Greeting(HtmlUtils.htmlEscape(message.getName()));
+    public void update(@ModelAttribute("room") Room room, @PathVariable("id") int id) throws Exception {
+        room.setStatus(HtmlUtils.htmlEscape(room.getStatus()));
+        roomDAO.update(id, room);
+        System.out.println(room.getStatus());
     }
 }
-
+//    @MessageMapping("/hello")
+//    @SendTo("/topic/greetings")
+//    public Greeting greeting(HelloMessage message) throws Exception {
+//        Thread.sleep(1000); // simulated delay
+//        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
+//    }

@@ -2,7 +2,7 @@ package com.lamps.demo.hello;
 
 public class Room {
     private int id;
-    private String name;
+    private String status;
 
     public Room(String spring) {}
     public Room() {}
@@ -15,12 +15,12 @@ public class Room {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStatus() {
+        return status;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 //    public void button() {

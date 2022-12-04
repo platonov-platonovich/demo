@@ -37,7 +37,7 @@ public class RoomDAO {
             while (resultSet.next()) {
                 Room room = new Room();
                 room.setId(resultSet.getInt("id"));
-                room.setName(resultSet.getString("status"));
+                room.setStatus(resultSet.getString("status"));
                 rooms.add(room);
             }
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class RoomDAO {
             Room room = new Room();
             resultSet.next();
             room.setId(resultSet.getInt("id"));
-            room.setName(resultSet.getString("status"));
+            room.setStatus(resultSet.getString("status"));
             return room;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,7 +64,7 @@ public class RoomDAO {
         try {
             PreparedStatement preparedStatement =
                     connection.prepareStatement("UPDATE Room SET status=? WHERE id=?");
-            preparedStatement.setString(1, updatedRoom.getName());
+            preparedStatement.setString(1, updatedRoom.getStatus());
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -9,7 +9,7 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#listStatus").html("");
 }
 
 function connect() {
@@ -32,7 +32,7 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
+function sendStatus() {
     stompClient.send("/app/hello", {}, JSON.stringify({'status': $("#status").val()}));
 }
 
@@ -44,7 +44,5 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { sendStatus(); });
 });

@@ -4,7 +4,9 @@ public class Room {
     private int id;
     private String status;
 
-    public Room(String spring) {}
+     public Room(String status) {
+        this.status = status;
+    }
     public Room() {}
 
     public int getId() {

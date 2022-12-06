@@ -14,10 +14,8 @@
 <a href="/">All rooms</a>
 <br/>
 <hr/>
-<a href="/1/edit">edit 1</a>
+<a th:href="@{/{id}/edit(id=${room.getId()})}">edit</a>
 <br/>
-<hr/>
-<a href="/2/edit">edit 2</a>
 <hr/>
 </body>
 </html>

@@ -7,6 +7,12 @@ public class Room {
      public Room(String status) {
         this.status = status;
     }
+
+    public Room(int id, String status) {
+        this.id = id;
+        this.status = status;
+    }
+
     public Room() {}
 
     public int getId() {

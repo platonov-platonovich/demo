@@ -1,6 +1,5 @@
 package com.lamps.demo;
 
-import com.lamps.demo.hello.Greeting;
 import com.lamps.demo.hello.Room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,14 +59,14 @@ public class GreetingIntegrationTests {
 				session.subscribe("/topic/greetings", new StompFrameHandler() {
 					@Override
 					public Type getPayloadType(StompHeaders headers) {
-						return Greeting.class;
+						return Room.class;
 					}
 
 					@Override
 					public void handleFrame(StompHeaders headers, Object payload) {
-						Greeting greeting = (Greeting) payload;
+						Room room = (Room) payload;
 						try {
-							assertEquals("Hello, Spring!", greeting.getContent());
+							assertEquals("Hello, Spring!", room.getStatus());
 						} catch (Throwable t) {
 							failure.set(t);
 						} finally {

@@ -1,14 +1,14 @@
 package com.lamps.demo.dao;
 
 import com.lamps.demo.hello.Room;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+@Repository
+public class RoomDaoPostgres implements RoomDao {
 
-@Component
-public class RoomDAO {
     private static int ROOMS_COUNT;
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USERNAME = "postgres";
@@ -28,6 +28,7 @@ public class RoomDAO {
         }
     }
 
+@Override
     public List<Room> index() {
         List<Room> rooms = new ArrayList<>();
         try {
@@ -46,6 +47,7 @@ public class RoomDAO {
         return rooms;
     }
 
+@Override
     public Room getById(int id) {
         try (Statement statement = connection.createStatement()) {
             String query = "SELECT * FROM Room WHERE id='%d'";
@@ -59,7 +61,7 @@ public class RoomDAO {
             throw new RuntimeException(e);
         }
     }
-
+@Override
     public void update(int id, Room updatedRoom) {
         try {
             PreparedStatement preparedStatement =

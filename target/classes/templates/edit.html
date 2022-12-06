@@ -7,15 +7,20 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="/app.js"></script>
 </head>
-<body onload="connect()">
+<body>
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
+            <div id="roomId" th:text="${room.getId()}">
+            </div>
+            <br>
+            <div id="roomStatus" th:text="${room.getStatus()}">
+            </div>
+            <br>
             <form class="form-inline">
                 <div class="form-group">
                     <label for="status">status</label>
@@ -25,19 +30,44 @@
             </form>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody id="listStatus">
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
+<script>
+    var stompClient = null;
+
+    function connect() {
+        var socket = new SockJS('/gs-guide-websocket');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/greetings', function (response) {
+                let room = JSON.parse(response.body);
+                if (room.id.toString() === $("#roomId").text()){
+                    showStatus(room);
+                }
+            });
+        });
+    }
+
+    function sendStatus() {
+        stompClient.send("/app/hello", {}, JSON.stringify({'id': $("#roomId").text(), 'status': $("#status").val()}));
+    }
+
+    function showStatus(room) {
+        $("#roomStatus").text(room.status);
+    }
+
+    $(function () {
+        $("form").on('submit', function (e) {
+            e.preventDefault();
+        });
+        $("#send").click(function () {
+            sendStatus();
+        });
+    });
+
+    $(document).ready(function () {
+        connect();
+    });
+</script>
 </body>
 </html>
